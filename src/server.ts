@@ -2,7 +2,7 @@ import express from "express"
 import bodyParser from "body-parser"
 import morgan from "morgan"
 import dotenv from "dotenv"
-import "module-alias/register"
+
 
 import cors from "cors"
 import routes from "./infrastructure/routes"

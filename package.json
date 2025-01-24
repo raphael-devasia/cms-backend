@@ -3,14 +3,16 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "start": "node dist/server.js",
-        "dev": "nodemon src/server.ts",
+
+         "start": "node --max-old-space-size=1024 dist/server.js",
+  "dev": "nodemon --exec ts-node --max-old-space-size=1024 src/server.ts",
         "build": "tsc",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
+     "ignore": ["node_modules", "dist"],
     "dependencies": {
         "@aws-sdk/s3-request-presigner": "^3.733.0",
         "aws-sdk": "^2.1692.0",
