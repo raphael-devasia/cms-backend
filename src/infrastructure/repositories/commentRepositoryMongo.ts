@@ -1,5 +1,6 @@
-import { IComment } from "src/domain/models/comment.interface"
-import { ICommentRepository } from "src/domain/repositories/commentRepository.interface"
+
+import { IComment } from "../../domain/models/comment.interface"
+import { ICommentRepository } from "../../domain/repositories/commentRepository.interface"
 import  Comment  from "../db/models/comment.model"
 
 

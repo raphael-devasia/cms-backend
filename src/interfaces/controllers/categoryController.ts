@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
-import { CategoryUseCase } from "src/application/usecases/category.usecase"
+import { CategoryUseCase } from "../../application/usecases/category.usecase"
+
 
 
 export class CategoryController {

@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
-import { CommentUseCase } from "src/application/usecases/comment.usecase"
+import { CommentUseCase } from "../../application/usecases/comment.usecase"
+
 
 
 export class CommentController {

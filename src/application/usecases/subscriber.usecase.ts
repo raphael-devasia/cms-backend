@@ -1,5 +1,6 @@
-import { ISubscriber } from "src/domain/models/subscriber.interface"
-import { ISubscriberRepository } from "src/domain/repositories/subscriberRepository.interface"
+import { ISubscriber } from "../../domain/models/subscriber.interface"
+import { ISubscriberRepository } from "../../domain/repositories/subscriberRepository.interface"
+
 
 export class SubscriberUseCase {
     constructor(private subscriberRepository: ISubscriberRepository) {}

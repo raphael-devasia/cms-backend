@@ -1,7 +1,8 @@
 // src/infrastructure/repositories/subscriberRepositoryMongo.ts
 
-import { ISubscriberRepository } from "src/domain/repositories/subscriberRepository.interface"
+
 import { ISubscriber } from "../../domain/models/subscriber.interface"
+import { ISubscriberRepository } from "../../domain/repositories/subscriberRepository.interface"
 import Subscriber from "../db/models/subscriber.model"
 
 

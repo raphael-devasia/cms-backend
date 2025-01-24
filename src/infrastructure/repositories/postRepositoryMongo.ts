@@ -1,11 +1,12 @@
-import { IPost } from "src/domain/models/post.interface";
-import { IIPostRepository } from "src/domain/repositories/postRepository.interface";
+
 import { s3 } from "../s3Config";
 import * as dotenv from "dotenv"
 dotenv.config()
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 import Post from "../db/models/post.model";
+import { IIPostRepository } from "../../domain/repositories/postRepository.interface";
+import { IPost } from "../../domain/models/post.interface";
 
 const s3client = new S3Client({
     region: process.env.AWS_REGION,

@@ -1,5 +1,6 @@
-import { ICategory } from "src/domain/models/category.interface"
-import { ICategoryRepository } from "src/domain/repositories/categoryRepository.interface"
+import { ICategory } from "../../domain/models/category.interface"
+import { ICategoryRepository } from "../../domain/repositories/categoryRepository.interface"
+
 
 
 export class CategoryUseCase {

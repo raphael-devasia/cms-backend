@@ -1,5 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose"
-import { IComment } from "src/domain/models/comment.interface"
+import { IComment } from "../../../domain/models/comment.interface"
+
 
 const commentSchema = new mongoose.Schema({
     postId: {

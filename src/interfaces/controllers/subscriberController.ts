@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
-import { SubscriberUseCase } from "src/application/usecases/subscriber.usecase"
+import { SubscriberUseCase } from "../../application/usecases/subscriber.usecase"
+
 
 
 export class SubscriberController {

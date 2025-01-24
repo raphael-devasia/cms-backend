@@ -1,7 +1,8 @@
 
 
-import { IUserRepository } from "src/domain/repositories/userRepository.interface"
+
 import { IUser } from "../../domain/models/user.interface"
+import { IUserRepository } from "../../domain/repositories/userRepository.interface"
 import User from "../db/models/user.model"
 
 

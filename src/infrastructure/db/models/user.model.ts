@@ -1,5 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose"
-import { IUser } from "src/domain/models/user.interface"
+import { IUser } from "../../../domain/models/user.interface"
+
 
 const userSchema = new Schema({
     firstName: { type: String, required: true },

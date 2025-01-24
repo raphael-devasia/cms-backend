@@ -1,6 +1,7 @@
 import { Router } from "express"
-import { SubscriberController } from "src/interfaces/controllers/subscriberController"
+
 import { createSubscriberController } from "../factories/subscriberFactory"
+import { SubscriberController } from "../../interfaces/controllers/subscriberController"
 
 
 const router: Router = Router()

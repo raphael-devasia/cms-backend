@@ -1,6 +1,8 @@
-import { UserController } from "src/interfaces/controllers/userController"
+
+import { UserUseCase } from "../../application/usecases/user.usecase"
+import { UserController } from "../../interfaces/controllers/userController"
 import { UserRepositoryMongo } from "../repositories/userRepositoryMongo"
-import { UserUseCase } from "src/application/usecases/user.usecase"
+
 
 
 export const createUserController = (): UserController => {

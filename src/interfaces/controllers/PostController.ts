@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
-import { PostUseCase } from "src/application/usecases/post.usecase"
+import { PostUseCase } from "../../application/usecases/post.usecase"
+
 
 export class PostController {
     constructor(private postUseCase: PostUseCase) {}

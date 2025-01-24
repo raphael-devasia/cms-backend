@@ -1,6 +1,7 @@
-import { IPost } from "src/domain/models/post.interface"
+
 
 import mongoose, { Schema, Document } from "mongoose"
+import { IPost } from "../../../domain/models/post.interface"
 
 const postSchema = new mongoose.Schema({
     title: { type: String, required: true },

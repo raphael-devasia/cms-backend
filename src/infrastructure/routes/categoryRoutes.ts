@@ -1,6 +1,7 @@
 import { Router } from "express"
-import { CategoryController } from "src/interfaces/controllers/categoryController"
+
 import { createCategoryController } from "../factories/categoryFactory"
+import { CategoryController } from "../../interfaces/controllers/categoryController"
 
 
 const router: Router = Router()

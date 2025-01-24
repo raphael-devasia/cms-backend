@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
-import { UserUseCase } from "src/application/usecases/user.usecase"
+import { UserUseCase } from "../../application/usecases/user.usecase"
+
 
 
 export class UserController {

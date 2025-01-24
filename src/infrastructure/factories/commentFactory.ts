@@ -1,6 +1,7 @@
-import { CommentController } from "src/interfaces/controllers/commentController"
+import { CommentUseCase } from "../../application/usecases/comment.usecase"
+import { CommentController } from "../../interfaces/controllers/commentController"
 import { CommentRepositoryMongo } from "../repositories/commentRepositoryMongo"
-import { CommentUseCase } from "src/application/usecases/comment.usecase"
+
 
 export const createCommentController = (): CommentController => {
     const commentRepository = new CommentRepositoryMongo()

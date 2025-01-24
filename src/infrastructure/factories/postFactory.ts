@@ -1,7 +1,9 @@
-    
-    import { PostController } from "src/interfaces/controllers/PostController"
+import { PostUseCase } from "../../application/usecases/post.usecase"
+import { PostController } from "../../interfaces/controllers/PostController"
 import { PostRepositoryMongo } from "../repositories/postRepositoryMongo"
-    import { PostUseCase } from "src/application/usecases/post.usecase"
+
+    
+
 
     export const createPostController = (): PostController => {
        

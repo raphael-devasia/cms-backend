@@ -1,6 +1,5 @@
-import { log } from "console"
-import { IPost } from "src/domain/models/post.interface"
-import { IIPostRepository } from "src/domain/repositories/postRepository.interface"
+import { IPost } from "../../domain/models/post.interface";
+import { IIPostRepository } from "../../domain/repositories/postRepository.interface";
 
 
 export class PostUseCase {

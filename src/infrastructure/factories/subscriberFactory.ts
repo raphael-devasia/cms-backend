@@ -1,6 +1,7 @@
-import { SubscriberController } from "src/interfaces/controllers/subscriberController"
+import { SubscriberUseCase } from "../../application/usecases/subscriber.usecase"
+import { SubscriberController } from "../../interfaces/controllers/subscriberController"
 import { SubscriberRepositoryMongo } from "../repositories/subscriberRepositoryMongo"
-import { SubscriberUseCase } from "src/application/usecases/subscriber.usecase"
+
 
 export const createSubscriberController = (): SubscriberController => {
     const subscriberRepository = new SubscriberRepositoryMongo()

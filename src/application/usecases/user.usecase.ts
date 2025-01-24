@@ -1,9 +1,11 @@
-import { IUser } from "src/domain/models/user.interface"
-import { IUserRepository } from "src/domain/repositories/userRepository.interface"
+
 
 import bcrypt from "bcrypt" // for password hashing
 import jwt from "jsonwebtoken" // for JWT token generation
-import { ILoginResponse } from "src/domain/models/loginResponse.interface"
+import { IUserRepository } from "../../domain/repositories/userRepository.interface"
+import { IUser } from "../../domain/models/user.interface"
+import { ILoginResponse } from "../../domain/models/loginResponse.interface"
+
 
 
 

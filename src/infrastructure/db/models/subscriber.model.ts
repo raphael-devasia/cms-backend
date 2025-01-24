@@ -1,5 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose"
-import { ISubscriber } from "src/domain/models/subscriber.interface"
+import { ISubscriber } from "../../../domain/models/subscriber.interface"
+
 
 const subscriberSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },

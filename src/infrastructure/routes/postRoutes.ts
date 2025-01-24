@@ -1,8 +1,9 @@
 import { Router } from "express"
-import { PostController } from "src/interfaces/controllers/PostController"
+import { PostController } from "../../interfaces/controllers/PostController"
 import { createPostController } from "../factories/postFactory"
-import { upload } from "src/interfaces/controllers/uploadMiddleware"
-import { fileValidationMiddleware } from "src/interfaces/controllers/fileValidationMiddleware"
+import { fileValidationMiddleware } from "../../interfaces/controllers/fileValidationMiddleware"
+import { upload } from "../../interfaces/controllers/uploadMiddleware"
+
 
 
 
