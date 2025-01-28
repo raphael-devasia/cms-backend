@@ -68,10 +68,11 @@ export class UserUseCase {
              throw new Error("Invalid credentials")
          }
 
+
          // Generate JWT token
          const token = jwt.sign(
              { id: user._id, email: user.email }, // Payload: Include user ID and email
-             "your-secret-key", // Secret key for signing the JWT token
+             process.env.JWT_SECRET||'', // Secret key for signing the JWT token
              { expiresIn: "1h" } // Expiry time for the token
          )
 

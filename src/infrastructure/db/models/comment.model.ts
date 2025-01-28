@@ -3,17 +3,11 @@ import { IComment } from "../../../domain/models/comment.interface"
 
 
 const commentSchema = new mongoose.Schema({
-    postId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Post",
-        required: true,
-    },
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-    },
-    content: { type: String, required: true },
+    postId: { type: String, required: true },
+    userId: { type: String, required: true },
+    comment: { type: String, required: true },
+    name: { type: String, required: true },
+    email: { type: String, required: true },
 })
 
 const Comment = mongoose.model<IComment & Document>("Comment", commentSchema)

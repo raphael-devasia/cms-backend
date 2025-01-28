@@ -6,8 +6,6 @@ export class PostUseCase {
     constructor(private postRepository: IIPostRepository) {}
 
     async createPost(postData: IPost): Promise<IPost> {
-        
-        
         return this.postRepository.create(postData)
     }
 
@@ -15,7 +13,7 @@ export class PostUseCase {
         return this.postRepository.findById(id)
     }
     async getUrl(
-        fileName:string
+        fileName: string
     ): Promise<{ presignedUrl: string; fileUrl: string } | null> {
         return this.postRepository.getUrl(fileName)
     }
@@ -30,12 +28,18 @@ export class PostUseCase {
     ): Promise<IPost | null> {
         return this.postRepository.update(id, postData)
     }
+    async patchPost(
+        id: string,
+        postData: Partial<IPost>
+    ): Promise<IPost | null> {
+        return this.postRepository.patch(id, postData)
+    }
 
     async deletePost(id: string): Promise<boolean> {
         return this.postRepository.delete(id)
     }
 
-    async getAllPosts(userId:string): Promise<IPost[]> {
+    async getAllPosts(userId: string): Promise<IPost[]> {
         return this.postRepository.getAll(userId)
     }
 

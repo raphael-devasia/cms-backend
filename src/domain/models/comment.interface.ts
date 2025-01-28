@@ -5,5 +5,7 @@ export interface IComment {
     _id: string
     postId: IPost
     userId: IUser
-    content: string
+    comment: string
+    name:string
+    email:string
 }

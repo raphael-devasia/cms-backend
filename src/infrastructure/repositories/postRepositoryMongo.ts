@@ -20,17 +20,15 @@ const s3client = new S3Client({
 
 export class PostRepositoryMongo implements IIPostRepository {
     async create(post: IPost): Promise<IPost> {
-         try {
-            
-            
-             
-             const result = await Post.create(post)
-             console.log(result)
-             return result
-         } catch (error) {
-              throw new Error("Failed to save the post")
-         }
-       
+      
+        
+        try {
+            const result = await Post.create(post)
+            console.log(result)
+            return result
+        } catch (error) {
+            throw new Error("Failed to save the post")
+        }
     }
     async findById(id: string): Promise<IPost | null> {
         try {
@@ -40,22 +38,26 @@ export class PostRepositoryMongo implements IIPostRepository {
                 console.log("Post not found")
                 return null // If the post is not found, return null
             }
+            post.views += 1
+
+            // Save the updated post back to the database
+            await post.save()
             return post
         } catch (error) {
             console.error("Error fetching post by ID:", error)
             throw new Error("Error fetching post.") // Re-throw or handle the error as needed
         }
     }
-    async getAll(userId:string): Promise<IPost[]> {
-       try {
-        console.log("Getting all posts for user:", userId)
-           // Fetch posts filtered by userId
-           const posts = await Post.find({ userId: userId })
-           return posts
-       } catch (error:any) {
-           console.error("Error fetching posts:", error.message) // Log the error for debugging
-           throw new Error("Failed to fetch posts. Please try again later.") // Throw a user-friendly error message
-       }
+    async getAll(userId: string): Promise<IPost[]> {
+        try {
+            console.log("Getting all posts for user:", userId)
+            // Fetch posts filtered by userId
+            const posts = await Post.find({ userId: userId })
+            return posts
+        } catch (error: any) {
+            console.error("Error fetching posts:", error.message) // Log the error for debugging
+            throw new Error("Failed to fetch posts. Please try again later.") // Throw a user-friendly error message
+        }
     }
     async update(id: string, iPosIPost: Partial<IPost>): Promise<IPost | null> {
         try {
@@ -69,11 +71,9 @@ export class PostRepositoryMongo implements IIPostRepository {
             }
 
             // Update the post with the provided data (iPosIPost)
-            const updatedPost = await Post.findByIdAndUpdate(
-                id,
-                iPosIPost,
-                { new: true }
-            )
+            const updatedPost = await Post.findByIdAndUpdate(id, iPosIPost, {
+                new: true,
+            })
 
             // Return the updated post
             return updatedPost
@@ -83,21 +83,45 @@ export class PostRepositoryMongo implements IIPostRepository {
             throw new Error("Failed to update the post")
         }
     }
-    async delete(id: string): Promise<boolean> {
-       try {
-      const result = await Post.findByIdAndDelete(id);
+    async patch(id: string, iPosIPost: Partial<IPost>): Promise<IPost | null> {
+        console.log(iPosIPost)
+        
+        try {
+            // Find the post by its ID
+            const post = await Post.findById(id) // Assuming `postModel` is your model for accessing the database
 
-      if (result) {
-          console.log(`Successfully deleted item with ID: ${id}`)
-          return true
-      } else {
-          throw new Error(`No item found with ID: ${id}`)
-      }
-    } catch (error) {
-      
-      throw error; // Re-throwing the error for further handling
+            // If the post does not exist, return null
+            if (!post) {
+                console.error("Post not found")
+                return null
+            }
+
+            // Update the post with the provided data (iPosIPost)
+            const updatedPost = await Post.findByIdAndUpdate(id, iPosIPost, {
+                new: true,
+            })
+            console.log(updatedPost)
+            // Return the updated post
+            return updatedPost
+        } catch (error) {
+            // Catch any errors and log them
+            console.error("Error updating post:", error)
+            throw new Error("Failed to update the post")
+        }
     }
-  
+    async delete(id: string): Promise<boolean> {
+        try {
+            const result = await Post.findByIdAndDelete(id)
+
+            if (result) {
+                console.log(`Successfully deleted item with ID: ${id}`)
+                return true
+            } else {
+                throw new Error(`No item found with ID: ${id}`)
+            }
+        } catch (error) {
+            throw error // Re-throwing the error for further handling
+        }
     }
     getPostsByCategory(categoryId: string): Promise<IPost[]> {
         throw new Error("Method not there.")
@@ -121,31 +145,33 @@ export class PostRepositoryMongo implements IIPostRepository {
 
         return data.Location // Return the S3 file URL
     }
-    async  getUrl(
-  fileName: string
-): Promise<{ presignedUrl: string; fileUrl: string } | null> {
-  const timestamp = Date.now();
-  const params = {
-    Bucket: process.env.S3_BUCKET_NAME,
-    Key: `uploads/${timestamp}_${fileName}`, // Unique file name
-    ContentType: 'image/jpeg', // Specify the content type, adjust as necessary
-  };
-  console.log(params);
+    async getUrl(
+        fileName: string
+    ): Promise<{ presignedUrl: string; fileUrl: string } | null> {
+        const timestamp = Date.now()
+        const params = {
+            Bucket: process.env.S3_BUCKET_NAME,
+            Key: `uploads/${timestamp}_${fileName}`, // Unique file name
+            ContentType: "image/jpeg", // Specify the content type, adjust as necessary
+        }
+        console.log(params)
 
-  try {
-    const command = new PutObjectCommand(params);
-    const url = await getSignedUrl(s3client, command, { expiresIn: 300 });
-    console.log(url);
+        try {
+            const command = new PutObjectCommand(params)
+            const url = await getSignedUrl(s3client, command, {
+                expiresIn: 300,
+            })
+            console.log(url)
 
-    // Construct the final file URL
-    const fileUrl = `https://${process.env.S3_BUCKET_NAME}.s3.amazonaws.com/uploads/${timestamp}_${fileName}`;
+            // Construct the final file URL
+            const fileUrl = `https://${process.env.S3_BUCKET_NAME}.s3.amazonaws.com/uploads/${timestamp}_${fileName}`
 
-    return { presignedUrl: url, fileUrl };
-  } catch (error) {
-    console.error('Error generating presigned URL:', error);
-    return null;
-  }
-}
+            return { presignedUrl: url, fileUrl }
+        } catch (error) {
+            console.error("Error generating presigned URL:", error)
+            return null
+        }
+    }
 }
 
 

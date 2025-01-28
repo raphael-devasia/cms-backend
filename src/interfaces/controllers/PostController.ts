@@ -7,7 +7,6 @@ export class PostController {
 
     async createPost(req: Request, res: Response): Promise<void> {
         try {
-            
             const post = await this.postUseCase.createPost(req.body)
             res.status(201).json({ success: true, data: post })
         } catch (error: any) {
@@ -35,6 +34,24 @@ export class PostController {
     async updatePost(req: Request, res: Response): Promise<void> {
         try {
             const updatedPost = await this.postUseCase.updatePost(
+                req.params.id,
+                req.body
+            )
+            if (updatedPost) {
+                res.status(200).json({ success: true, data: updatedPost })
+            } else {
+                res.status(404).json({
+                    success: false,
+                    message: "Post not found",
+                })
+            }
+        } catch (error: any) {
+            res.status(400).json({ success: false, message: error.message })
+        }
+    }
+    async patchPost(req: Request, res: Response): Promise<void> {
+        try {
+            const updatedPost = await this.postUseCase.patchPost(
                 req.params.id,
                 req.body
             )
@@ -99,15 +116,16 @@ export class PostController {
         }
     }
     async getPresignedUrl(req: Request, res: Response): Promise<void> {
-       
-        
         try {
             const fileName = req.query.fileName as string
             const url = await this.postUseCase.getUrl(fileName)
-            console.log(url);
-            
+            console.log(url)
 
-            res.status(200).json({ success: true, presignedUrl: url?.presignedUrl, fileUrl: url?.fileUrl })
+            res.status(200).json({
+                success: true,
+                presignedUrl: url?.presignedUrl,
+                fileUrl: url?.fileUrl,
+            })
         } catch (error: any) {
             res.status(500).json({ success: false, message: error.message })
         }

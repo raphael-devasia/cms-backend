@@ -13,6 +13,9 @@ export class CommentUseCase {
     async getCommentById(id: string): Promise<IComment | null> {
         return this.commentRepository.findById(id)
     }
+    async getCommentByUserId(userId: string): Promise<IComment[]> {
+        return this.commentRepository.findByUserId(userId)
+    }
 
     async getAllCommentsByPost(postId: string): Promise<IComment[]> {
         return this.commentRepository.getAllByPost(postId)

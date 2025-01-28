@@ -3,6 +3,7 @@ import { PostController } from "../../interfaces/controllers/PostController"
 import { createPostController } from "../factories/postFactory"
 import { fileValidationMiddleware } from "../../interfaces/controllers/fileValidationMiddleware"
 import { upload } from "../../interfaces/controllers/uploadMiddleware"
+import authorize from "../../interfaces/controllers/authMiddleware"
 
 
 
@@ -22,10 +23,11 @@ router.post(
 ) 
 
 router.get("/all/:id", (req, res) => postController.getAllPosts(req, res)) // Get all posts
-router.post("/", (req, res) => postController.createPost(req, res)) // Create a new post
+router.post("/",authorize, (req, res) => postController.createPost(req, res)) // Create a new post
 router.get("/:id", (req, res) => postController.getPost(req, res)) // Get post by ID
-router.put("/:id", (req, res) => postController.updatePost(req, res)) // Update post by ID
-router.delete("/:id", (req, res) => postController.deletePost(req, res)) // Delete post by ID
+router.put("/:id",authorize, (req, res) => postController.updatePost(req, res)) // Update post by ID
+router.patch("/:id",authorize, (req, res) => postController.patchPost(req, res)) // Update post by ID
+router.delete("/:id",authorize, (req, res) => postController.deletePost(req, res)) // Delete post by ID
 
 
 
